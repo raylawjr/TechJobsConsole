@@ -42,7 +42,7 @@ namespace TechJobsConsole
                     else
                     {
                         List<string> results = JobData.FindAll(columnChoice);
-
+                        results.Sort();
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
                         foreach (string item in results)
                         {
@@ -146,6 +146,7 @@ namespace TechJobsConsole
                         Console.WriteLine("{0}: {1}", line.Key, line.Value);
                     }
                     Console.WriteLine("*****");
+                Console.WriteLine("");
                 }
             //}
             //else
