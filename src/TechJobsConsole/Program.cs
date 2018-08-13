@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechJobsConsole
 {
@@ -63,12 +64,28 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        //Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        if (!searchResults.Any())
+                        {
+                            Console.WriteLine("No results found.");
+                        }
+                        else
+                        {
+                            PrintJobs(searchResults);
+                        }
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
+                        if (!searchResults.Any())
+                        {
+                            Console.WriteLine("No results found.");
+                        }
+                        else
+                        {
+                            PrintJobs(searchResults);
+                        }
                     }
                 }
             }
@@ -118,7 +135,23 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            //if (someJobs.Any())
+            //{
+                //Console.WriteLine("printJobs is not implemented yet");
+                foreach (Dictionary<string, string> job in someJobs)
+                {
+                    Console.WriteLine("*****");
+                    foreach (KeyValuePair<string, string> line in job)
+                    {
+                        Console.WriteLine("{0}: {1}", line.Key, line.Value);
+                    }
+                    Console.WriteLine("*****");
+                }
+            //}
+            //else
+            //{ 
+              //  Console.WriteLine("No results found");
+            //}
         }
     }
 }
